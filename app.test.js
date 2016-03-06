@@ -67,6 +67,20 @@ describe("Simple User Http CRUD Api", function() {
 
   });
 
+  it("deletes an existing user", function (done) {
+
+    co(function *() {
+      var insertedUser = yield app.users.insert(user);
+      var url = "/user/" + insertedUser._id;
+
+      request
+        .del(url)
+        .expect(200, done)
+
+    });
+
+  });
+
 });
 
 
