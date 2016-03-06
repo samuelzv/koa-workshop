@@ -50,6 +50,20 @@ describe("Simple User Http CRUD Api", function() {
           .expect(200, done);
     });
 
+  });
+
+  it("updates an existing user", function (done) {
+
+    co(function *() {
+      var insertedUser = yield app.users.insert(user);
+      var url = "/user/" + insertedUser._id;
+
+      request
+        .put(url)
+        .send({name: "Older Marcus", age: 43, height:1.94})
+        .expect("location", url)
+        .expect(204, done)
+    });
 
   });
 

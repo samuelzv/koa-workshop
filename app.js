@@ -13,6 +13,7 @@ module.exports.users = users;
 
 app.use(routes.post("/user", addUser));
 app.use(routes.get("/user/:id",getUser));
+app.use(routes.put("/user/:id", updateUser));
 
 app.listen(3000);
 console.log('The app is listening, Port: 3000');
@@ -36,5 +37,14 @@ function *getUser(id) {
 
   this.body = user;
   this.status = 200;
+}
+
+function *updateUser(id) {
+  var userFromRequest = yield parse(this);
+
+  yield users.updateById(id, userFromRequest);
+
+  this.set("location", "/user/" + id);
+  this.status = 204;
 }
 
