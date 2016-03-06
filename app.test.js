@@ -1,5 +1,6 @@
 var app = require('./app.js');
 var co = require('co');
+var users = require('./userRoutes.js').users;
 
 var request = require('supertest').agent(app.listen());
 
@@ -22,7 +23,7 @@ describe("Simple User Http CRUD Api", function() {
 
   it("fails with validation error for users without name", function(done) {
 
-    delete user.name
+    delete user.name;
 
     request
       .post("/user")
@@ -35,7 +36,7 @@ describe("Simple User Http CRUD Api", function() {
 
     co(function *() {
         // insert test user in db
-        var insertedUser = yield app.users.insert(user);
+        var insertedUser = yield users.insert(user);
 
         // get url of user
         var url = "/user/" + insertedUser._id;
@@ -55,7 +56,7 @@ describe("Simple User Http CRUD Api", function() {
   it("updates an existing user", function (done) {
 
     co(function *() {
-      var insertedUser = yield app.users.insert(user);
+      var insertedUser = yield users.insert(user);
       var url = "/user/" + insertedUser._id;
 
       request
@@ -70,7 +71,7 @@ describe("Simple User Http CRUD Api", function() {
   it("deletes an existing user", function (done) {
 
     co(function *() {
-      var insertedUser = yield app.users.insert(user);
+      var insertedUser = yield users.insert(user);
       var url = "/user/" + insertedUser._id;
 
       request
