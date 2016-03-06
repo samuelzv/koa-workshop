@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/samuelzv/koa-workshop.git"
   },
-  "author": "",
+  "author": "Samuel Zuniga Vanoye",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/samuelzv/koa-workshop/issues"
